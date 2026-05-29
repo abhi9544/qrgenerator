@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">fun little tool</p>
+        <h1>✨ QR Generator</h1>
+        <p class="subtitle">
+          Make QR codes for text, links, or Wi-Fi. Live preview, transparent PNG export, and a little extra style.
+        </p>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Dark</span>
+      </button>
+    </header>
+
+    <section class="card">
+      <div class="editor">
+        <div class="field">
+          <label for="mode-select">QR mode</label>
+          <select id="mode-select">
+            <option value="text">Text / Link</option>
+            <option value="wifi">Wi-Fi</option>
+          </select>
+        </div>
+
+        <div id="text-mode" class="mode-panel">
+          <div class="field">
+            <label for="qr-input">Text / link</label>
+            <textarea
+              id="qr-input"
+              rows="5"
+              placeholder="Paste a link, message, or whatever..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div id="wifi-mode" class="mode-panel hidden">
+          <div class="wifi-grid">
+            <div class="field">
+              <label for="wifi-ssid">Wi-Fi name (SSID)</label>
+              <input type="text" id="wifi-ssid" placeholder="My Wi-Fi" />
+            </div>
+
+            <div class="field">
+              <label for="wifi-pass">Password</label>
+              <input type="text" id="wifi-pass" placeholder="password123" />
+            </div>
+
+            <div class="field">
+              <label for="wifi-type">Security</label>
+              <select id="wifi-type">
+                <option value="WPA" selected>WPA / WPA2 / WPA3</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">No password</option>
+              </select>
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" id="wifi-hidden" />
+              <span>Hidden network</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <span id="char-count">0 characters</span>
+          <button id="copy-btn" type="button" class="ghost-btn">Copy payload</button>
+        </div>
+
+        <div class="controls-grid">
+          <div class="field">
+            <label for="qr-color">QR color</label>
+            <input type="color" id="qr-color" value="#111111" />
+          </div>
+
+          <div class="field">
+            <label for="qr-size">Size</label>
+            <div class="range-wrap">
+              <input type="range" id="qr-size" min="180" max="480" value="300" />
+              <span id="size-label">300px</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="qr-shape">QR style</label>
+            <select id="qr-shape">
+              <option value="square">Square</option>
+              <option value="rounded" selected>Rounded</option>
+              <option value="extra-rounded">Extra rounded</option>
+              <option value="dots">Dots</option>
+              <option value="classy">Classy</option>
+              <option value="classy-rounded">Classy rounded</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="corner-style">Corner style</label>
+            <select id="corner-style">
+              <option value="square">Square</option>
+              <option value="extra-rounded" selected>Extra rounded</option>
+              <option value="dot">Dot</option>
+            </select>
+          </div>
+
+          <div class="field upload-field">
+            <label>Center logo</label>
+            <input type="file" id="qr-logo" accept="image/*" hidden />
+            <div class="upload-row">
+              <button id="upload-btn" type="button" class="secondary-btn">Choose image</button>
+              <span id="logo-name" class="file-name">No logo selected</span>
+            </div>
+            <button id="clear-logo-btn" type="button" class="ghost-btn small-btn">Remove logo</button>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button id="download-btn" type="button" class="primary-btn">
+            Download PNG
+          </button>
+        </div>
+
+        <p class="hint">
+          Tip: press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to download fast.
+        </p>
+      </div>
+
+      <div class="preview">
+        <div class="preview-shell">
+          <div id="qr-container" aria-live="polite"></div>
+        </div>
+        <p id="status" class="status">Ready to generate chaos.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
